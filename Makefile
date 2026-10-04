@@ -11,13 +11,13 @@ help:
 	@echo "  make run-ai   - Start FastAPI microservice on localhost:8000"
 
 setup:
-	uv sync
+	uv sync --extra dev
 
 lint:
 	uv run ruff check .
 
 test:
-	uv run pytest ai-service/tests
+	uv run pytest
 
 check: lint test
 

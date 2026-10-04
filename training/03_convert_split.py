@@ -1,57 +1,55 @@
-# Training Script: Sequence-Grouped Dataset Split & Label Converter
-# Group images by capture sequence prefix to prevent train/test leakage across adjacent video frames.
+"""training/03_convert_split.py  (shim – delegates to make_split.py)
+
+This file is kept for backward compatibility.
+All logic has moved to training/make_split.py which supports configurable
+group strategies (prefix / index_window / phash), leakage checking, and
+a deterministic manifest CSV.
+
+Usage (new):
+    python training/make_split.py --dataset_root data/raw --output data/processed/split_manifest.csv
+
+Usage (legacy – this file):
+    python training/03_convert_split.py --image_dir data/raw/images
+"""
+from __future__ import annotations
 
 import argparse
-import os
-import random
-from collections import defaultdict
+import sys
+from pathlib import Path
 
 
-def sequence_grouped_split(image_dir: str, train_ratio: float = 0.70, val_ratio: float = 0.15, test_ratio: float = 0.15):
-    """
-    Groups images by sequence (common prefix before timestamp/index) before splitting.
-    """
-    images = [f for f in os.listdir(image_dir) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
-    sequences = defaultdict(list)
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="[SHIM] Sequence-grouped split – delegates to make_split.py"
+    )
+    parser.add_argument("--image_dir", type=str, default="data/raw/images")
+    parser.add_argument("--seed", type=int, default=42)
+    args = parser.parse_args()
 
-    for img in images:
-        # Group by sequence key, e.g., 'seq1_001.jpg' -> 'seq1'
-        seq_key = img.split('_')[0] if '_' in img else img[:4]
-        sequences[seq_key].append(img)
+    # Import and call make_split directly
+    sys.path.insert(0, str(Path(__file__).parent))
+    from make_split import group_by_prefix, make_split
 
-    seq_keys = list(sequences.keys())
-    random.seed(42)
-    random.shuffle(seq_keys)
+    image_dir = Path(args.image_dir)
+    if not image_dir.exists():
+        print(f"Directory {image_dir} not found; run with valid dataset path.")
+        return
 
-    n_total = len(seq_keys)
-    n_train = int(n_total * train_ratio)
-    n_val = int(n_total * val_ratio)
+    exts = {".jpg", ".jpeg", ".png"}
+    images = sorted(p for p in image_dir.iterdir() if p.suffix.lower() in exts)
+    rows = make_split(images, group_by_prefix, {}, 0.70, 0.15, args.seed)
 
-    train_seqs = set(seq_keys[:n_train])
-    val_seqs = set(seq_keys[n_train:n_train + n_val])
-    test_seqs = set(seq_keys[n_train + n_val:])
+    counts = {"train": 0, "val": 0, "test": 0}
+    for _, _, split in rows:
+        counts[split] += 1
 
-    split_counts = {"train": 0, "val": 0, "test": 0}
-    for k, files in sequences.items():
-        if k in train_seqs:
-            split_counts["train"] += len(files)
-        elif k in val_seqs:
-            split_counts["val"] += len(files)
-        else:
-            split_counts["test"] += len(files)
-
-    print(f"Sequence split complete across {n_total} sequences:")
-    print(f"Train: {split_counts['train']} frames ({len(train_seqs)} sequences)")
-    print(f"Val:   {split_counts['val']} frames ({len(val_seqs)} sequences)")
-    print(f"Test:  {split_counts['test']} frames ({len(test_seqs)} sequences)")
-    return split_counts
+    total_groups = len({g for _, g, _ in rows})
+    print(f"Sequence split complete across {total_groups} groups:")
+    print(f"Train: {counts['train']} frames")
+    print(f"Val:   {counts['val']} frames")
+    print(f"Test:  {counts['test']} frames")
+    print("Tip: use training/make_split.py for full options and manifest CSV output.")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Sequence-grouped split converter")
-    parser.add_argument("--image_dir", type=str, default="data/raw/images", help="Path to raw image directory")
-    args = parser.parse_args()
-    if os.path.exists(args.image_dir):
-        sequence_grouped_split(args.image_dir)
-    else:
-        print(f"Directory {args.image_dir} not found; run with valid dataset path.")
+    main()

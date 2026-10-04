@@ -1,0 +1,42 @@
+# training/configs/classes.yaml
+# Authoritative class definitions for the CRDDC/RDD dataset used in this project.
+# All training scripts read from here; never hardcode class IDs in Python.
+
+# ── Raw dataset classes (CRDDC label IDs) ────────────────────────────────────
+# Active classes kept in the 3-class model
+active_classes:
+  D00: "Longitudinal Crack"
+  D10: "Transverse Crack"
+  D20: "Alligator Crack"
+  D40: "Pothole"
+
+# Excluded classes: images whose ONLY annotations are from this list are
+# candidates for the excluded-only-policy (drop or keep_as_background).
+# Source: CRDDC label schema – these classes are rare, ambiguous, or country-specific.
+excluded_classes:
+  - D44   # Lane marking (Japan-specific)
+  - D01   # Bleeding (asphalt bleed-through, Japan)
+  - D43   # Cross-walk blur (Japan)
+  - D11   # Transverse crack (India variant / alternate id)
+  - D50   # Manhole cover
+  - D0w0  # Unclear / legacy label
+
+# ── 3-class mapping ───────────────────────────────────────────────────────────
+# Maps raw CRDDC class IDs → 3-class integer indices used by YOLO training.
+# D00 and D10 collapse into "crack" (super-class) because D10 is severely
+# under-represented (~46 boxes total) — see docs/LIMITATIONS.md limitation #1.
+three_class_mapping:
+  D00: 0   # → crack (longitudinal)
+  D10: 0   # → crack (transverse)
+  D20: 1   # → alligator
+  D40: 2   # → pothole
+
+# Human-readable names for the 3-class indices
+three_class_names:
+  0: "crack"
+  1: "alligator"
+  2: "pothole"
+
+# ── YOLO dataset.yaml fields ──────────────────────────────────────────────────
+nc: 3
+names: ["crack", "alligator", "pothole"]

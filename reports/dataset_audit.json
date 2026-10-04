@@ -1,0 +1,75 @@
+{
+  "policy": "drop",
+  "excluded_classes": [
+    "D01",
+    "D43",
+    "D50",
+    "D11",
+    "D0w0",
+    "D44"
+  ],
+  "train": {
+    "total_images": 40,
+    "boxes_per_class_id": {
+      "D00": 34,
+      "D20": 18,
+      "D10": 11,
+      "D40": 9,
+      "D44": 10
+    },
+    "excluded_only_count": 4,
+    "excluded_only_images": [
+      "Japan_seq01_0000.jpg",
+      "Japan_seq01_0001.jpg",
+      "Japan_seq01_0002.jpg",
+      "Japan_seq01_0003.jpg"
+    ],
+    "empty_label_count": 2,
+    "empty_label_images": [
+      "Czech_seq01_0000.jpg",
+      "Czech_seq01_0001.jpg"
+    ],
+    "no_label_count": 0,
+    "no_label_images": []
+  },
+  "val": {
+    "total_images": 15,
+    "boxes_per_class_id": {
+      "D00": 15,
+      "D10": 5,
+      "D20": 8,
+      "D40": 4,
+      "D44": 3
+    },
+    "excluded_only_count": 0,
+    "excluded_only_images": [],
+    "empty_label_count": 0,
+    "empty_label_images": [],
+    "no_label_count": 0,
+    "no_label_images": []
+  },
+  "test": {
+    "total_images": 25,
+    "boxes_per_class_id": {
+      "D00": 19,
+      "D20": 10,
+      "D10": 6,
+      "D40": 5,
+      "D44": 7
+    },
+    "excluded_only_count": 4,
+    "excluded_only_images": [
+      "Japan_seq02_0000.jpg",
+      "Japan_seq02_0001.jpg",
+      "Japan_seq02_0002.jpg",
+      "Japan_seq02_0003.jpg"
+    ],
+    "empty_label_count": 2,
+    "empty_label_images": [
+      "Czech_seq02_0000.jpg",
+      "Czech_seq02_0001.jpg"
+    ],
+    "no_label_count": 0,
+    "no_label_images": []
+  }
+}

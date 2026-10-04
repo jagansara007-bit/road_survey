@@ -1,0 +1,9 @@
+model: yolov8n.pt
+imgsz: 640
+epochs: 100
+batch: 16
+seed: 42
+data: data/processed/yolo3/dataset.yaml
+augment: true
+project: runs/detect
+name: train_v1

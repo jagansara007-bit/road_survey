@@ -7,19 +7,23 @@ classes:
   D20: "Alligator Crack"
   D40: "Pothole"
 
-# Severity thresholds (ratio of defect bounding box to frame area)
+# Tracking configuration
+tracking:
+  min_track_frames: 3
+
+# Severity thresholds (ratio of defect bounding box to frame area in near zone)
 # Low: ratio < 0.02
 # Medium: 0.02 <= ratio < 0.08
 # High: ratio >= 0.08
 severity:
-  ratio_low: 0.02
-  ratio_high: 0.08
+  low_max_ratio: 0.02
+  medium_max_ratio: 0.08
+  near_zone_top_fraction: 0.5
 
 # Road condition rating thresholds (based on segment damage index)
 condition:
-  fair_threshold: 0.05
-  poor_threshold: 0.15
-
+  fair_min_index: 0.05
+  poor_min_index: 0.15
 # Priority scoring weights
 priority:
   severity_weights:
@@ -36,3 +40,41 @@ priority:
   recurrence_factors:
     previously_failed: 1.5
     first_occurrence: 1.0
+
+# Verification thresholds
+verification:
+  match_radius_m: 10.0
+  coverage_radius_m: 15.0
+
+# Priority exposure radius
+priority_exposure:
+  radius_m: 200.0
+
+# Cost estimation defaults
+cost:
+  nominal_area_m2:
+    Low: 0.5
+    Medium: 1.5
+    High: 3.0
+  unit_rate_inr_per_m2: 1500.0
+
+# Track deduplication
+dedup:
+  merge_radius_m: 5.0
+
+# Road segments
+segments:
+  length_m: 50.0
+
+# Object detection parameters
+detector:
+  conf_thres: 0.25
+  iou_threshold: 0.45
+  input_size: 640
+
+# Privacy and media retention
+privacy:
+  blur_faces: true
+  blur_plates: true
+  retention_days: 30
+

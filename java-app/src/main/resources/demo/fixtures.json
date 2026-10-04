@@ -1,0 +1,26 @@
+[
+  {
+    "defect_id": 1,
+    "class": "D40",
+    "lat": 12.9716,
+    "lon": 77.5946,
+    "severity": "High",
+    "priority": 9.5,
+    "estimated_cost": 5000.0,
+    "status": "New",
+    "crop_path": "crops/1.jpg",
+    "recurrence": false
+  },
+  {
+    "defect_id": 2,
+    "class": "crack",
+    "lat": 12.9720,
+    "lon": 77.5950,
+    "severity": "Medium",
+    "priority": 4.2,
+    "estimated_cost": 2000.0,
+    "status": "Open",
+    "crop_path": "crops/2.jpg",
+    "recurrence": false
+  }
+]

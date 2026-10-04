@@ -7,10 +7,10 @@
   - Automated testing and linting passing with `make check`
   - Verification of `.gitignore` preventing sensitive/large files
 - [ ] **Phase 1: Foundation Fixes**
-  - Grouped capture-sequence split in `training/`
-  - Excluded-class audit script
-  - Union-area rasterization damage index in `condition.py`
-  - D10 crack super-class mitigation
+  - [x] Grouped capture-sequence split in `training/`
+  - [x] Excluded-class audit script
+  - [ ] Union-area rasterization damage index in `condition.py`
+  - [x] D10 crack super-class mitigation
 - [ ] **Phase 2: Baseline YOLO Training & Export**
   - Train YOLO on cleaned dataset
   - Export ONNX runtime model

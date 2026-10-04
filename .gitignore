@@ -39,6 +39,7 @@ wheels/
 *.bin
 models/weights/
 weights/
+runs/
 
 # Video & Raw Media Recordings
 *.mp4
@@ -49,6 +50,7 @@ weights/
 
 # Databases & SQLite files
 *.sqlite
+*.sqlite*
 *.sqlite3
 *.db
 *.db-journal
@@ -56,6 +58,10 @@ weights/
 
 # Data directories
 data/
+!data/fixtures/
+!data/fixtures/**
+!data/osm_cache/
+!data/osm_cache/**
 data/raw/
 data/processed/
 data/chennai/
