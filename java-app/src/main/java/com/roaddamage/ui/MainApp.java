@@ -15,7 +15,7 @@ public class MainApp extends Application {
         var args = getParameters().getRaw();
         if (args.contains("--demo")) {
             isDemoMode = true;
-            System.out.println("Running in DEMO mode. Pre-loaded local fixtures active; network bypassed.");
+            System.out.println("Running in DEMO mode. API calls bypassed.");
         }
     }
 

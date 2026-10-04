@@ -22,7 +22,7 @@ test:
 check: lint test
 
 run-ai:
-	cd ai-service && uv run uvicorn app.main:app --host 0.0.0.0 --port 8000
+	uv run --directory ai-service python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 clean:
 	rm -rf __pycache__ .pytest_cache .ruff_cache
