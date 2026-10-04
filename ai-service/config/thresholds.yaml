@@ -1,0 +1,38 @@
+# Threshold Configuration for Road Damage Detection & Assessment
+
+# Damage defect classes
+classes:
+  D00: "Longitudinal Crack"
+  D10: "Transverse Crack"
+  D20: "Alligator Crack"
+  D40: "Pothole"
+
+# Severity thresholds (ratio of defect bounding box to frame area)
+# Low: ratio < 0.02
+# Medium: 0.02 <= ratio < 0.08
+# High: ratio >= 0.08
+severity:
+  ratio_low: 0.02
+  ratio_high: 0.08
+
+# Road condition rating thresholds (based on segment damage index)
+condition:
+  fair_threshold: 0.05
+  poor_threshold: 0.15
+
+# Priority scoring weights
+priority:
+  severity_weights:
+    Low: 1.0
+    Medium: 2.0
+    High: 3.0
+  road_weights:
+    primary: 1.5
+    secondary: 1.25
+    residential: 1.0
+  exposure_factors:
+    near_sensitive_facility: 1.5
+    standard: 1.0
+  recurrence_factors:
+    previously_failed: 1.5
+    first_occurrence: 1.0

@@ -1,0 +1,31 @@
+# Project Roadmap
+
+- [x] **Phase 0: Bootstrap and standards**
+  - Inventory legacy code (if present) to `docs/LEGACY_INVENTORY.md`
+  - Establish target directory structure (`ai-service/`, `training/`, `java-app/`, `docs/`)
+  - Externalize hard-coded thresholds to `ai-service/config/thresholds.yaml`
+  - Automated testing and linting passing with `make check`
+  - Verification of `.gitignore` preventing sensitive/large files
+- [ ] **Phase 1: Foundation Fixes**
+  - Grouped capture-sequence split in `training/`
+  - Excluded-class audit script
+  - Union-area rasterization damage index in `condition.py`
+  - D10 crack super-class mitigation
+- [ ] **Phase 2: Baseline YOLO Training & Export**
+  - Train YOLO on cleaned dataset
+  - Export ONNX runtime model
+- [ ] **Phase 3: Test Evaluation & Metrics**
+  - Test set metrics on grouped split and test frames
+- [ ] **Phase 4: Calibrated Severity (F5)**
+  - Closest-approach severity measurement in `severity.py`
+  - Threshold agreement validation
+- [ ] **Phase 5: Segment-Level Road Condition (F2)**
+  - 50m road segment aggregation in `condition.py` and `segments.py`
+- [ ] **Phase 6: JavaFX UI Dashboard**
+  - MapView and QueueView implementation
+- [ ] **Phase 7: JavaFX + FastAPI Integration (F1, F3)**
+  - Tracking integration with ByteTrack in `detector.py`
+  - Priority scoring engine in `priority.py`
+- [ ] **Phase 8: SQLite DAO & Verification (F4)**
+  - Survey and defect tracking schema
+  - Repair verification view
