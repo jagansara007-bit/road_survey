@@ -1,0 +1,31 @@
+{
+  "highways": [
+    {
+      "tags": {
+        "highway": "primary"
+      },
+      "geometry": [
+        [13.0000, 80.0000],
+        [13.0010, 80.0000]
+      ]
+    },
+    {
+      "tags": {
+        "highway": "residential"
+      },
+      "geometry": [
+        [13.0000, 80.0010],
+        [13.0010, 80.0010]
+      ]
+    }
+  ],
+  "amenities": [
+    {
+      "tags": {
+        "amenity": "school"
+      },
+      "lat": 13.0005,
+      "lon": 80.0002
+    }
+  ]
+}
