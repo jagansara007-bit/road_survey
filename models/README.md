@@ -34,6 +34,6 @@ To verify model inference immediately after cloning the repository:
 # 1. Install dependencies
 uv sync
 
-# 2. Run test suite verifying detector and pipeline integration
-uv run pytest tests/test_detector.py -v
+# 2. Run backend test suite
+uv run pytest ai-service/tests -v
 ```
