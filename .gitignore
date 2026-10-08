@@ -31,15 +31,18 @@ wheels/
 !.env.example
 
 # Large ML Weights & Checkpoints
-*.pt
 *.pth
-*.onnx
 *.engine
 *.weights
 *.bin
-models/weights/
 weights/
 runs/
+
+# Ignore loose weights but allow bundled models in models/
+*.pt
+*.onnx
+!models/*.pt
+!models/*.onnx
 
 # Video & Raw Media Recordings
 *.mp4

@@ -45,8 +45,21 @@ def get_tracker() -> Any:
     global _TRACKER
     if _TRACKER is None:
         model_path = os.environ.get("MODEL_PATH", "")
+        if not model_path:
+            candidates = [
+                os.path.join(os.getcwd(), "models", "best.pt"),
+                os.path.join(os.path.dirname(__file__), "..", "..", "..", "models", "best.pt"),
+                os.path.join(os.path.dirname(__file__), "..", "..", "models", "best.pt"),
+            ]
+            for candidate in candidates:
+                if os.path.exists(candidate):
+                    model_path = os.path.abspath(candidate)
+                    break
         from app.tracker import FakeTracker
         if not model_path:
             return FakeTracker({})
-        _TRACKER = RoadDamageTracker(model_path)
+        try:
+            _TRACKER = RoadDamageTracker(model_path)
+        except Exception:
+            return FakeTracker({})
     return _TRACKER

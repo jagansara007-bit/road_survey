@@ -58,6 +58,17 @@ class RoadDamageDetector:
     """
 
     def __init__(self, model_path: str = "", cfg: dict[str, Any] | None = None):
+        if not model_path:
+            import os
+            candidates = [
+                os.path.join(os.getcwd(), "models", "best.onnx"),
+                os.path.join(os.path.dirname(__file__), "..", "..", "..", "models", "best.onnx"),
+                os.path.join(os.path.dirname(__file__), "..", "..", "models", "best.onnx"),
+            ]
+            for candidate in candidates:
+                if os.path.exists(candidate):
+                    model_path = os.path.abspath(candidate)
+                    break
         self.model_path = model_path
         self.classes = get_classes()
         self.session = None
